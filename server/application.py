@@ -4,6 +4,8 @@ from utils.fibonacci import fibonacci
 
 app = Flask(__name__)
 
+notes = []
+
 
 @app.route("/")
 def index():
@@ -52,6 +54,19 @@ def form():
     name = request.form.get("name")
     password = request.form.get("password")
     return render_template("greeting.html", name=name, password=password)
+
+
+@app.route("/notes", methods=["GET", "POST"])
+def notes_method():
+    if request.method == "POST":
+        note = request.form.get("note")
+        clear = request.form.get("action") == "clear"
+        if clear:
+            notes.clear()
+        if note:
+            notes.append(note)
+    return render_template("notes.html", list=notes, heading="Hi, welcome to the simple notes form. Add and delete "
+                                                             "notes as you wish.")
 
 
 @app.route("/bye/<string:name>")

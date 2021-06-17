@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block style %}
+.note {
+    color : grey;
+    background : white;
+}
+{% endblock %}
+
+{% block heading %}
+{{heading}}
+{% endblock %}
+
+{% block content %}
+
+<h2>
+    Here are the notes you submitted :
+</h2>
+
+    <ul>
+        {% for note in list %}
+            <li class="note"> {{note}} </li>
+        {% endfor %}
+    </ul>
+
+<hr>
+
+<h2>Add note here</h2>
+<form action="{{url_for('notes_method')}}" method="post">
+    <div>
+        <input name="note" type="text" placeholder="Enter a note">
+        <br>
+        <br>
+        <button type="submit" name="action" value="add">Add Note</button>
+    </div>
+    <hr>
+    <button type="submit" name="action" value="clear">Clear Notes</button>
+</form>
+{% endblock %}
