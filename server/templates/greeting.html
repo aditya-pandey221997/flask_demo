@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block heading %}
+Hi {{user}}, welcome to the application.
+{% endblock %}
+
+{% block content %}
+<div>
+    <p>You have successfully submitted your credentials. Please view the credentials below : </p>
+    <ul>
+        <li>Name :: {{name}}</li>
+        <li>Password :: {{password}}</li>
+    </ul>
+</div>
+{% endblock %}

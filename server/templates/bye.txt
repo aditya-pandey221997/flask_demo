@@ -1,0 +1,1 @@
+Bye{{user}}, thank you for visiting.

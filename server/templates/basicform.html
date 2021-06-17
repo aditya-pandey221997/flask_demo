@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block heading %}
+{{heading}}
+{% endblock %}
+
+{% block content %}
+<form>
+    <div>
+        <input name="name" type="text" placeholder="Enter your name">
+        <br>
+        <input name="password" type="password" placeholder="Enter password">
+        <br>
+    </div>
+
+    <div>
+        Favourite color?
+        <input name="color" type="radio" value="Red"> Red
+        <input name="color" type="radio" value="Blue"> Blue
+        <input name="color" type="radio" value="Yellow"> Yellow
+        <input name="color" type="radio" value="Other"> Other
+    </div>
+<hr>
+    <div>
+        <input name="country" list="countries" placeholder="Country">
+        <datalist id="countries">
+            <option value="Afghanistan">Afghanistan</option>
+            <option value="India">India</option>
+            <option value="Pakistan">Pakistan</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Turkey">Turkey</option>
+            <option value="England">England</option>
+        </datalist>
+    </div>
+</form>
+
+<div>
+    <a href="{{url_for('bye', name='user')}}">Leave the page...</a>
+</div>
+{% endblock %}
