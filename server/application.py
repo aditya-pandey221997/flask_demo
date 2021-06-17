@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+from flask_session import Session
 
 from utils.fibonacci import fibonacci
 
 app = Flask(__name__)
 
-notes = []
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 
 @app.route("/")
@@ -58,15 +61,17 @@ def form():
 
 @app.route("/notes", methods=["GET", "POST"])
 def notes_method():
+    if session.get("notes") is None:
+        session["notes"] = []
     if request.method == "POST":
         note = request.form.get("note")
         clear = request.form.get("action") == "clear"
         if clear:
-            notes.clear()
+            session["notes"].clear()
         if note:
-            notes.append(note)
-    return render_template("notes.html", list=notes, heading="Hi, welcome to the simple notes form. Add and delete "
-                                                             "notes as you wish.")
+            session["notes"].append(note)
+    return render_template("notes.html", list=session["notes"], heading="Hi, welcome to the simple notes form. Add "
+                                                                        "and delete notes as you wish.")
 
 
 @app.route("/bye/<string:name>")
